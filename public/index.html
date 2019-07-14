@@ -1,0 +1,86 @@
+
+<!-- index.html -->
+<!doctype html>
+<html ng-app="businessOrg">
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<head>
+     <!-- META -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+     
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+     <!-- https://cdnjs.cloudflare.com/ajax/libs/angular-foundation-6/0.11.22/angular-foundation.js -->
+
+     <!-- SPELLS -->
+     <script
+     src="https://code.jquery.com/jquery-3.4.1.min.js"
+     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+     crossorigin="anonymous"></script><!-- load jquery -->
+     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+     <!-- Popper JS -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+     <!-- Latest compiled JavaScript -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+     <!-- Sweet Alerts-->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+     <script src="core.js"></script>
+</head>
+<body ng-controller="mainController">
+     <br />
+     <br />
+     <div class="container">
+          <!-- http://localhost:8080/upload -->
+          <FORM action="" 
+               enctype="multipart/form-data"
+               method="post">
+          <P>
+               What files are you uploading? <INPUT type="file" name="file" id="file"><BR>
+          <button type="submit" class="btn btn-primary" id="but_upload">Upload</button> 
+          <!-- <INPUT type="reset"> -->
+          </FORM>
+     </div>
+     <script type="text/javascript"> 
+          $(document).ready(function() { 
+               $("#but_upload").click(function(e) {
+                    e.preventDefault() 
+                    var fd = new FormData(); 
+                    var files = $('#file')[0].files[0]; 
+                    fd.append('file', files); 
+         
+                    $.ajax({ 
+                         url: '/upload', 
+                         type: 'post', 
+                         data: fd, 
+                         contentType: false, 
+                         processData: false, 
+                         success: function(response){ 
+                              if(response != 0){ 
+                                   //alert('file uploaded'); 
+                                   Swal.fire({
+                                        title: 'Awesome!',
+                                        text: 'File uploaded Successfully!',
+                                        type: 'success',
+                                        onAfterClose: function(){location.reload(true);}
+                                   })
+                              } 
+                              else{ 
+                                   //alert('file not uploaded'); 
+                                   Swal.fire(
+                                        'Bummer!',
+                                        'File was not uploaded Successfully!',
+                                        'error'
+                                   )
+                              } 
+                         }, 
+                    });
+               }); 
+          }); 
+     </script> 
+</body>
+</html>
