@@ -103,26 +103,29 @@ db.serialize(function() {
     })
 
     app.get('/api/bp', function(req, res){
-
+        var capability2 = req.query.capability;
+        db.all('select bprocessing from business_processing where associated_capability = ?', [capability2], function(err, rows){
+            if (err) {
+                //console.log(err);
+                res.send(err);
+            }
+            //console.log(rows);
+            res.json(rows);
+        })
     })
 
     app.get('/api/bf', function(req, res){
-
+        var process2 = req.query.process;
+        db.all('select functions from business_functions where associated_bprocessing = ?', [process2], function(err, rows){
+            if (err) {
+                //console.log(err);
+                res.send(err);
+            }
+            //console.log(rows);
+            res.json(rows);
+        })
     })
-
-    // var stmt = db.prepare("INSERT INTO lorem VALUES (?)");
-    // for (var i = 0; i < 10; i++) {
-    //     stmt.run("Ipsum " + i);
-    // }
-    // stmt.finalize();
-
-    // db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
-    //     console.log(row.id + ": " + row.info);
-    // });
-    //return db.close()
 })
-
-//db.close();
 
 app.get('*', function(req, res) {
     res.sendFile(__dirname +'/public/index.html'); // load the single view file (angular will handle the page changes on the front-end)

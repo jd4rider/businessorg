@@ -44,6 +44,31 @@
           <button type="submit" class="btn btn-primary" id="but_upload">Upload</button> 
           <!-- <INPUT type="reset"> -->
           </FORM>
+          <div class="row">
+               <div class="col-sm-4">
+                    <select class="form-control" id="exampleFormControlSelect1"
+                         ng-model="selected"
+                         ng-options="capability as capability.capability for capability in capabilities"
+                         ng-change="selectcapability(selected)">
+                         <option value=''>Choose a Business Capability...</option>
+                    </select>
+               </div>
+               <div class="col-sm-4">
+                    <select class="form-control" id="exampleFormControlSelect2"
+                         ng-model="selected2"
+                         ng-options="process as process.bprocessing for process in processing"
+                         ng-change="selectprocess(selected2)">
+                         <option value=''>Choose a Business Process...</option>
+                    </select>
+               </div>
+               <div class="col-sm-4">
+                    <select class="form-control" id="exampleFormControlSelect3"
+                         ng-model="selected3"
+                         ng-options="function as function.functions for function in functions">
+                         <option value=''>Choose a Business Function...</option>
+                    </select>
+               </div>
+          </div>
      </div>
      <script type="text/javascript"> 
           $(document).ready(function() { 

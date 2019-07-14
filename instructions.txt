@@ -1,0 +1,5 @@
+1. convert xlsx to csv and save it somewhere convenient
+2. download and install node.js from https://nodejs.org/en/
+3. unzip the contents of the zip file
+4. run 'npm install' from node command prompt at the root directory of project
+5. goto http://localhost:8080/ in web browser and upload .csv file and the three dropdowns will work
